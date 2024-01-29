@@ -52,5 +52,24 @@ Town.create = async (newTown, result) => {
     }
 }
 
+
+Town.updateById = async (id,newTown, result) => {
+
+    try{
+
+        const connection = await pool.getConnection();
+        const dbQuery = "UPDATE town SET t_name = ?, t_desc = ? WHERE (t_id = ?)";
+        const values = [newTown.name, newTown.desc,id]
+        const [res] = await connection.execute(dbQuery, values);
+
+        if (res.affectedRows == 0) throw new Error('Requested Id not found!')
+
+        result(null, {res,...newTown,id:id});
+    }catch (ctErr) {
+        console.log("Error On updateById town :: ", ctErr);
+        result(ctErr, null);
+    }
+}
+
 module.exports = Town;
   
