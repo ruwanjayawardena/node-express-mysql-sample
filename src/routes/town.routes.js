@@ -1,4 +1,4 @@
-const {findAll,create,update} = require("../controllers/town.controller.js");
+const {findAll, create, update, deleteTown} = require("../controllers/town.controller.js");
 
 const routes = (app) => {
     app.route('/town')
@@ -7,14 +7,10 @@ const routes = (app) => {
 
     app.route('/town/:id')
         .put(update)
-
-        // .put((req, res) => {
-        //     res.send('Put Request with ID Successfull');
-        // })
-
-        .delete((req, res) => {
-            res.send('Delete Request with ID Successfull');
-        })
+        .delete(deleteTown)
+    // .put((req, res) => {
+    //     res.send('Put Request with ID Successfull');
+    // })
 }
 
 module.exports = routes;

@@ -10,8 +10,7 @@ describe("Town API Test with Routes", () => {
     test("Get All Towns", async () => {
         const res = await request(app).get('/town');
         expect(res.header['content-type']).toMatch(/json/);
-        console.log('Results :: ',res._body);
+        console.log('Results :: ', res._body);
         expect(res.statusCode).toBe(200);
     });
-
 });

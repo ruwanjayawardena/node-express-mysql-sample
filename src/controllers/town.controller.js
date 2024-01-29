@@ -119,6 +119,44 @@ const update = async (req, res) => {
     }
 }
 
+/**
+ * deleteTown
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+const deleteTown = async (req, res) => {
+
+    try {
+
+        //validate URL param content
+        if (!req.params.id) {
+            res.status(404).send({
+                message: "Id need to pass as parameter!"
+            });
+        }
+
+        await Town.delete(req.params.id, (err, data) => {
+
+            //handling err passed by model
+            if (err) throw new Error(err);
+
+            res.status(200).send(data);
+        });
+    } catch (error) {
+
+        if (error.message.includes("Id not found")) {
+            res.status(404).send({
+                message: error.message
+            });
+        } else {
+            res.status(500).send({
+                message: error.message || "Error occurred while deleting towns."
+            });
+        }
+    }
+}
+
 module.exports = {
-    findAll, create, update
+    findAll, create, update, deleteTown
 }
