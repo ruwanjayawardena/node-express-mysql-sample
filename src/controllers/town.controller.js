@@ -8,7 +8,7 @@ const Town = require("../models/town.model.js");
  */
 const findAll = async (req, res) => {
     try {
-        await Town.getAll2( (err,data) => {
+        await Town.getAll( (err,data) => {
 
             //handling err passed by model
             if (err) throw new Error(err);
